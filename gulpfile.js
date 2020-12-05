@@ -29,6 +29,7 @@ const ttf2woff2 = require("gulp-ttf2woff2");
 /* Paths */
 const srcPath = 'src/';
 const distPath = 'dist/';
+const fs = require('fs');
 
 const path = {
     build: {
@@ -272,6 +273,29 @@ function clean(cb) {
     cb();
 }
 
+function fontsStyle() {
+
+    let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
+    if (file_content == '') {
+        fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
+        return fs.readdir(path.build.fonts, function (err, items) {
+            if (items) {
+                let c_fontname;
+                for (var i = 0; i < items.length; i++) {
+                    let fontname = items[i].split('.');
+                    fontname = fontname[0];
+                    if (c_fontname != fontname) {
+                        fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+                    }
+                    c_fontname = fontname;
+                }
+            }
+        })
+    }
+
+    cb();
+}
+
 function watchFiles() {
     gulp.watch([path.watch.html], html);
     gulp.watch([path.watch.css], cssWatch);
@@ -280,7 +304,7 @@ function watchFiles() {
     gulp.watch([path.watch.fonts], fonts);
 }
 
-const build = gulp.series(clean, gulp.parallel(html, css, js, images, fonts));
+const build = gulp.series(clean, gulp.parallel(html, css, js, images, fonts), fontStyle);
 const watch = gulp.parallel(build, watchFiles, serve);
 
 
@@ -295,3 +319,4 @@ exports.clean = clean;
 exports.build = build;
 exports.watch = watch;
 exports.default = watch;
+exports.fontStyle = fontStyle;
