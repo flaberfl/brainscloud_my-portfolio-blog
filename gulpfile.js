@@ -294,7 +294,7 @@ function fontsStyle() {
   }
 }
 
-function cb() { }
+function cb() {}
 
 
 function watchFiles() {
