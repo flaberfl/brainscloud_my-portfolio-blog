@@ -3,6 +3,11 @@
 @import "fonts";
 @import "vendor/reset";
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 
 html {
   font-size: 62.5%;
@@ -14,3 +19,8 @@ body {
   font-size: 1.4rem;
   color: $white;
 }
+@import "blocks/page";
+@import "blocks/header";
+@import "blocks/sidebar";
+@import "blocks/main";
+@import "blocks/container";
