@@ -1,8 +1,8 @@
 "use strict";
 
 const {
-    src,
-    dest
+  src,
+  dest
 } = require("gulp");
 const gulp = require("gulp");
 const autoprefixer = require("gulp-autoprefixer");
@@ -32,28 +32,28 @@ const distPath = 'dist/';
 const fs = require('fs');
 
 const path = {
-    build: {
-        html: distPath,
-        js: distPath + "assets/js/",
-        css: distPath + "assets/css/",
-        images: distPath + "assets/images/",
-        fonts: distPath + "assets/fonts/"
-    },
-    src: {
-        html: srcPath + "*.html",
-        js: srcPath + "assets/js/*.js",
-        css: srcPath + "assets/scss/*.scss",
-        images: srcPath + "assets/images/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml,json}",
-        fonts: srcPath + "assets/fonts/**/*.{eot,woff,woff2,ttf,svg}"
-    },
-    watch: {
-        html: srcPath + "**/*.html",
-        js: srcPath + "assets/js/**/*.js",
-        css: srcPath + "assets/scss/**/*.scss",
-        images: srcPath + "assets/images/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml,json}",
-        fonts: srcPath + "assets/fonts/**/*.{eot,woff,woff2,ttf,svg}"
-    },
-    clean: "./" + distPath
+  build: {
+    html: distPath,
+    js: distPath + "assets/js/",
+    css: distPath + "assets/css/",
+    images: distPath + "assets/images/",
+    fonts: distPath + "assets/fonts/"
+  },
+  src: {
+    html: srcPath + "*.html",
+    js: srcPath + "assets/js/*.js",
+    css: srcPath + "assets/scss/*.scss",
+    images: srcPath + "assets/images/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml,json}",
+    fonts: srcPath + "assets/fonts/**/*.{eot,woff,woff2,ttf,svg}"
+  },
+  watch: {
+    html: srcPath + "**/*.html",
+    js: srcPath + "assets/js/**/*.js",
+    css: srcPath + "assets/scss/**/*.scss",
+    images: srcPath + "assets/images/**/*.{jpg,png,svg,gif,ico,webp,webmanifest,xml,json}",
+    fonts: srcPath + "assets/fonts/**/*.{eot,woff,woff2,ttf,svg}"
+  },
+  clean: "./" + distPath
 }
 
 
@@ -61,250 +61,251 @@ const path = {
 /* Tasks */
 
 function serve() {
-    browserSync.init({
-        server: {
-            baseDir: "./" + distPath
-        }
-    });
+  browserSync.init({
+    server: {
+      baseDir: "./" + distPath
+    }
+  });
 }
 
 function html(cb) {
-    panini.refresh();
-    return src(path.src.html, {
-            base: srcPath
-        })
-        .pipe(plumber())
-        .pipe(panini({
-            root: srcPath,
-            layouts: srcPath + 'layouts/',
-            partials: srcPath + 'partials/',
-            helpers: srcPath + 'helpers/',
-            data: srcPath + 'data/'
-        }))
-        .pipe(dest(path.build.html))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  panini.refresh();
+  return src(path.src.html, {
+      base: srcPath
+    })
+    .pipe(plumber())
+    .pipe(panini({
+      root: srcPath,
+      layouts: srcPath + 'layouts/',
+      partials: srcPath + 'partials/',
+      helpers: srcPath + 'helpers/',
+      data: srcPath + 'data/'
+    }))
+    .pipe(dest(path.build.html))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function css(cb) {
-    return src(path.src.css, {
-            base: srcPath + "assets/scss/"
-        })
-        .pipe(plumber({
-            errorHandler: function (err) {
-                notify.onError({
-                    title: "SCSS Error",
-                    message: "Error: <%= error.message %>"
-                })(err);
-                this.emit('end');
-            }
-        }))
-        .pipe(sass({
-            includePaths: './node_modules/'
-        }))
-        .pipe(group_media())
-        .pipe(autoprefixer({
-            cascade: true
-        }))
-        .pipe(cssbeautify())
-        .pipe(dest(path.build.css))
-        .pipe(cssnano({
-            zindex: false,
-            discardComments: {
-                removeAll: true
-            }
-        }))
-        .pipe(removeComments())
-        .pipe(rename({
-            suffix: ".min",
-            extname: ".css"
-        }))
-        .pipe(dest(path.build.css))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  return src(path.src.css, {
+      base: srcPath + "assets/scss/"
+    })
+    .pipe(plumber({
+      errorHandler: function (err) {
+        notify.onError({
+          title: "SCSS Error",
+          message: "Error: <%= error.message %>"
+        })(err);
+        this.emit('end');
+      }
+    }))
+    .pipe(sass({
+      includePaths: './node_modules/'
+    }))
+    .pipe(group_media())
+    .pipe(autoprefixer({
+      cascade: true
+    }))
+    .pipe(cssbeautify())
+    .pipe(dest(path.build.css))
+    .pipe(cssnano({
+      zindex: false,
+      discardComments: {
+        removeAll: true
+      }
+    }))
+    .pipe(removeComments())
+    .pipe(rename({
+      suffix: ".min",
+      extname: ".css"
+    }))
+    .pipe(dest(path.build.css))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function cssWatch(cb) {
-    return src(path.src.css, {
-            base: srcPath + "assets/scss/"
-        })
-        .pipe(plumber({
-            errorHandler: function (err) {
-                notify.onError({
-                    title: "SCSS Error",
-                    message: "Error: <%= error.message %>"
-                })(err);
-                this.emit('end');
-            }
-        }))
-        .pipe(sass({
-            includePaths: './node_modules/'
-        }))
-        .pipe(rename({
-            suffix: ".min",
-            extname: ".css"
-        }))
-        .pipe(dest(path.build.css))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  return src(path.src.css, {
+      base: srcPath + "assets/scss/"
+    })
+    .pipe(plumber({
+      errorHandler: function (err) {
+        notify.onError({
+          title: "SCSS Error",
+          message: "Error: <%= error.message %>"
+        })(err);
+        this.emit('end');
+      }
+    }))
+    .pipe(sass({
+      includePaths: './node_modules/'
+    }))
+    .pipe(rename({
+      suffix: ".min",
+      extname: ".css"
+    }))
+    .pipe(dest(path.build.css))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function js(cb) {
-    return src(path.src.js, {
-            base: srcPath + 'assets/js/'
-        })
-        .pipe(plumber({
-            errorHandler: function (err) {
-                notify.onError({
-                    title: "JS Error",
-                    message: "Error: <%= error.message %>"
-                })(err);
-                this.emit('end');
-            }
-        }))
-        .pipe(webpackStream({
-            mode: "production",
-            output: {
-                filename: 'app.js',
-            },
-            module: {
-                rules: [{
-                    test: /\.(js)$/,
-                    exclude: /(node_modules)/,
-                    loader: 'babel-loader',
-                    query: {
-                        presets: ['@babel/preset-env']
-                    }
-                }]
-            }
-        }))
-        .pipe(dest(path.build.js))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  return src(path.src.js, {
+      base: srcPath + 'assets/js/'
+    })
+    .pipe(plumber({
+      errorHandler: function (err) {
+        notify.onError({
+          title: "JS Error",
+          message: "Error: <%= error.message %>"
+        })(err);
+        this.emit('end');
+      }
+    }))
+    .pipe(webpackStream({
+      mode: "production",
+      output: {
+        filename: 'app.js',
+      },
+      module: {
+        rules: [{
+          test: /\.(js)$/,
+          exclude: /(node_modules)/,
+          loader: 'babel-loader',
+          query: {
+            presets: ['@babel/preset-env']
+          }
+        }]
+      }
+    }))
+    .pipe(dest(path.build.js))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function jsWatch(cb) {
-    return src(path.src.js, {
-            base: srcPath + 'assets/js/'
-        })
-        .pipe(plumber({
-            errorHandler: function (err) {
-                notify.onError({
-                    title: "JS Error",
-                    message: "Error: <%= error.message %>"
-                })(err);
-                this.emit('end');
-            }
-        }))
-        .pipe(webpackStream({
-            mode: "development",
-            output: {
-                filename: 'app.js',
-            }
-        }))
-        .pipe(dest(path.build.js))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  return src(path.src.js, {
+      base: srcPath + 'assets/js/'
+    })
+    .pipe(plumber({
+      errorHandler: function (err) {
+        notify.onError({
+          title: "JS Error",
+          message: "Error: <%= error.message %>"
+        })(err);
+        this.emit('end');
+      }
+    }))
+    .pipe(webpackStream({
+      mode: "development",
+      output: {
+        filename: 'app.js',
+      }
+    }))
+    .pipe(dest(path.build.js))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function images(cb) {
-    return src(path.src.images)
-        .pipe(imagemin([
-            imagemin.gifsicle({
-                interlaced: true
-            }),
-            imagemin.mozjpeg({
-                quality: 95,
-                progressive: true
-            }),
-            imagemin.optipng({
-                optimizationLevel: 5
-            }),
-            imagemin.svgo({
-                plugins: [{
-                        removeViewBox: true
-                    },
-                    {
-                        cleanupIDs: false
-                    }
-                ]
-            })
-        ]))
-        .pipe(dest(path.build.images))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  return src(path.src.images)
+    .pipe(imagemin([
+      imagemin.gifsicle({
+        interlaced: true
+      }),
+      imagemin.mozjpeg({
+        quality: 95,
+        progressive: true
+      }),
+      imagemin.optipng({
+        optimizationLevel: 5
+      }),
+      imagemin.svgo({
+        plugins: [{
+            removeViewBox: true
+          },
+          {
+            cleanupIDs: false
+          }
+        ]
+      })
+    ]))
+    .pipe(dest(path.build.images))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function fonts(cb) {
-    src(path.src.fonts)
-        .pipe(ttf2woff())
-        .pipe(dest(path.build.fonts));
-    return src(path.src.fonts)
-        .pipe(ttf2woff2())
-        .pipe(dest(path.build.fonts))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+  src(path.src.fonts)
+    .pipe(ttf2woff())
+    .pipe(dest(path.build.fonts));
+  return src(path.src.fonts)
+    .pipe(ttf2woff2())
+    .pipe(dest(path.build.fonts))
+    .pipe(browserSync.reload({
+      stream: true
+    }));
 
-    cb();
+  cb();
 }
 
 function clean(cb) {
-    return del(path.clean);
+  return del(path.clean);
 
-    cb();
+  cb();
 }
 
 function fontsStyle() {
 
-    let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
-    if (file_content == '') {
-        fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
-        return fs.readdir(path.build.fonts, function (err, items) {
-            if (items) {
-                let c_fontname;
-                for (var i = 0; i < items.length; i++) {
-                    let fontname = items[i].split('.');
-                    fontname = fontname[0];
-                    if (c_fontname != fontname) {
-                        fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
-                    }
-                    c_fontname = fontname;
-                }
-            }
-        })
-    }
-
-    cb();
+  let file_content = fs.readFileSync(srcPath + 'assets/scss/_fonts.scss');
+  if (file_content == '') {
+    fs.writeFile(srcPath + 'assets/scss/_fonts.scss', '', cb);
+    return fs.readdir(path.build.fonts, function (err, items) {
+      if (items) {
+        let c_fontname;
+        for (var i = 0; i < items.length; i++) {
+          let fontname = items[i].split('.');
+          fontname = fontname[0];
+          if (c_fontname != fontname) {
+            fs.appendFile(srcPath + 'assets/scss/_fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+          }
+          c_fontname = fontname;
+        }
+      }
+    })
+  }
 }
+
+function cb() { }
+
 
 function watchFiles() {
-    gulp.watch([path.watch.html], html);
-    gulp.watch([path.watch.css], cssWatch);
-    gulp.watch([path.watch.js], jsWatch);
-    gulp.watch([path.watch.images], images);
-    gulp.watch([path.watch.fonts], fonts);
+  gulp.watch([path.watch.html], html);
+  gulp.watch([path.watch.css], cssWatch);
+  gulp.watch([path.watch.js], jsWatch);
+  gulp.watch([path.watch.images], images);
+  gulp.watch([path.watch.fonts], fonts);
 }
 
-const build = gulp.series(clean, gulp.parallel(html, css, js, images, fonts), fontStyle);
+const build = gulp.series(clean, gulp.parallel(html, css, js, images, fonts), fontsStyle);
 const watch = gulp.parallel(build, watchFiles, serve);
 
 
@@ -319,4 +320,4 @@ exports.clean = clean;
 exports.build = build;
 exports.watch = watch;
 exports.default = watch;
-exports.fontStyle = fontStyle;
+exports.fontsStyle = fontsStyle;
