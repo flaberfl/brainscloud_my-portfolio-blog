@@ -3,8 +3,7 @@
   height: 100vh;
 
   background-color: $primary;
-  box-shadow: 5px
-    0 15px rgba(#050505, .1);
+  box-shadow: 5px 0 15px rgba(#050505, .1);
 
   position: fixed;
   top: 0;
@@ -23,4 +22,14 @@
     height: 100%;
     object-fit: cover;
   }
+}
+
+.sidebar__content {
+  padding: 0 2rem;
+}
+
+.sidebar__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.8rem ;
 }
