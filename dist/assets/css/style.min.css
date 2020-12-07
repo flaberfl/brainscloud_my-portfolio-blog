@@ -176,6 +176,9 @@ html {
 /**
  * Address `outline` inconsistency between Chrome and other browsers.
  */
+a {
+  text-decoration: none; }
+
 a:focus {
   outline: thin dotted; }
 
@@ -438,6 +441,13 @@ body {
 .nav__list {
   display: flex; }
 
+.nav__item {
+  position: relative; }
+  .nav__item:hover .nav__link {
+    background-color: #3137C9; }
+  .nav__item:hover > .subnav {
+    display: block; }
+
 .nav__link {
   display: block;
   padding: 1.4rem;
@@ -447,8 +457,6 @@ body {
   text-decoration: none;
   color: #fff;
   transition: background-color .2s linear; }
-  .nav__link:hover {
-    background-color: #3137C9; }
   .nav__link.has-subnav {
     position: relative;
     padding-right: 3.5rem; }
@@ -463,6 +471,26 @@ body {
       border-style: solid;
       border-width: 6px 5px 0 5px;
       border-color: #fff transparent transparent transparent; }
+
+.subnav {
+  display: none;
+  width: 16.5rem;
+  padding: .5rem 0;
+  background-color: #3137C9;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 100%;
+  left: 0; }
+
+.subnav__link {
+  display: block;
+  padding: .45rem 1.2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: background-color .2s ease-in-out; }
+  .subnav__link:hover {
+    background-color: #2c31b4; }
 
 .sidebar {
   width: 300px;
@@ -562,3 +590,12 @@ body {
     box-shadow: 0px 7px 17px -10px rgba(49, 55, 201, 0.3); }
     .btn--blue:hover {
       background-color: #2c31b4; }
+
+.stories {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-column-gap: 1.3rem;
+  grid-template-rows: 19.5rem; }
+
+.stories__item {
+  background-color: #ccc; }

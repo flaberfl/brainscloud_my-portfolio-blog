@@ -1,0 +1,10 @@
+.stories {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 1.3rem;
+    grid-template-rows: 19.5rem;
+}
+
+.stories__item {
+    background-color: #ccc;
+}
