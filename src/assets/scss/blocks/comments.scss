@@ -1,0 +1,29 @@
+.comments {
+  margin-top: 3rem;
+}
+
+.comments__title {
+  margin-bottom: 2rem;
+
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: $white;
+}
+
+.form__control {
+  display: block;
+  width: 100%;
+
+  background: none;
+  border: none;
+  border-radius: 0;
+
+  font-family: inherit;
+  font-size: 1.4rem;
+  color: $white;
+
+  &::placeholder {
+    color: rgba($white, .2);
+  }
+}
+
