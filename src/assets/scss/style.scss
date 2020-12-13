@@ -20,6 +20,13 @@ body {
   line-height: 1.5;
   color: $white;
 }
+
+a {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 @import "blocks/page";
 @import "blocks/header";
 @import "blocks/search";
@@ -36,3 +43,5 @@ body {
 @import "blocks/post";
 @import "blocks/embed";
 @import "blocks/pagination";
+@import "blocks/related";
+@import "blocks/comments";
