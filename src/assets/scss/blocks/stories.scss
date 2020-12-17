@@ -15,7 +15,7 @@
   box-shadow: 0 5px 15px rgba($black, .2);
   cursor: pointer;
 
-  &:after {
+  &:after {  // Эффект затемнения для картинок
     content: "";
     display: block;
     width: 100%;
