@@ -3,6 +3,7 @@
 @import "fonts";
 @import "vendor/reset";
 
+
 *,
 *:before,
 *:after {
@@ -20,16 +21,16 @@ body {
   line-height: 1.5;
   color: $white;
 
-  &.no-scroll {   // Убиоаем скролл за модальным окном
-    overflow: hidden;
-  }
+  // &.no-scroll {   // Убиоаем скролл за модальным окном
+  //   overflow: hidden;
+  // }
 }
 
 a {
   &:hover {
     text-decoration: underline;
   }
-}   
+}
 
 @import "blocks/page";
 @import "blocks/header";
@@ -54,4 +55,4 @@ a {
 @import "blocks/tags";
 @import "blocks/cabinet";
 @import "blocks/signup";
-@import "blocks/modal";
+// @import "blocks/modal";
