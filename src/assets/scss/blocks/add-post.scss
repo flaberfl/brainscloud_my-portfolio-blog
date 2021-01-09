@@ -14,10 +14,12 @@
 
 .add-post__textarea {
   display: block;
-  width: 80%;
+  flex-grow: 1; // Блок меняет размер при в зовисимости от ост.м
   height: 2.6rem;
+  overflow: hidden;
+  
 
-  border: none;
+  border: none; 
   background: transparent;
   resize: none;
 
@@ -31,7 +33,8 @@
 }
 
 .add-post__form-actions {
-  width: 20%;
+  // width: 120px;
+  flex-shrink: 0;
   display: flex;
   justify-content: flex-end;
 }
