@@ -7,7 +7,7 @@
   border: none;
 
   font-size: 0;
-  color: transparent;
+  color: transparent; 
 
   position: absolute;
   top: 50%;
@@ -46,7 +46,7 @@
     transition: opacity .2s linear;
   }
 
-  &.active {
+  .show-sidebar & { // Если в body добавиться этот класс-он будет глобальным
     span {
       opacity: 0;
     }
