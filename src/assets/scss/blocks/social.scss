@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
 
-    @include breakpiont($tablet-bp) {
+    @include breakpoint($tablet-bp) {
       display: none;
     }
 }

@@ -10,7 +10,7 @@
   }
 }
 
-@mixin breakpiont($bp) {
+@mixin breakpoint($bp) {
   @media (max-width: $bp) {
     @content;
   }

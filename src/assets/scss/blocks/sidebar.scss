@@ -10,7 +10,7 @@
   left: 0;
   z-index: $z-index-sidebar;
 
-  @include breakpiont($tablet-bp) {
+  @include breakpoint($tablet-bp) {
     top: 4rem;
     height: calc(100vh - 4rem);
     transform: translateX(-100%);
@@ -34,7 +34,7 @@
     object-fit: cover;
   }
 
-  @include breakpiont($tablet-bp) {
+  @include breakpoint($tablet-bp) {
     height: 10rem;
   }
 }

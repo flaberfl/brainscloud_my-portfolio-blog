@@ -1,16 +1,24 @@
 .nav {
-  @include breakpiont($tablet-bp) {
+  @include breakpoint($tablet-bp) {
     display: none;
+  }
+
+  &--mobile {
+    display: block;
   }
 }
 
 .nav__list {
   display: flex;
+
+  @include breakpoint($tablet-bp) {
+    flex-direction: column;
+  }
 }
 
 .nav__item {
   position: relative;
-  
+
 
   &:hover {
     .nav__link {

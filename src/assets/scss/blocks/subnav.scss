@@ -12,6 +12,14 @@
     position: absolute;
     top: 100%;
     left: 0;
+
+    @include breakpoint($tablet-bp) {
+      position: static;
+      width: 100%;
+      
+      background: transparent;
+      box-shadow: none;
+    }
 }
 
 .subnav__link {
