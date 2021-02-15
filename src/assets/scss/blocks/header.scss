@@ -14,8 +14,6 @@
   @include breakpoint($tablet-bp) {
     width: 100%;
   }
-
-
 }
 
 .header__left {
@@ -32,6 +30,6 @@
   justify-content: flex-end;
 
   @include breakpoint($tablet-bp) {
-    width: 6 0%;
+    width: 60%;
   }
 }

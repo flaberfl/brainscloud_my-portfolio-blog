@@ -21,9 +21,11 @@ body {
   line-height: 1.5;
   color: $white;
 
-  // &.no-scroll {   // Убиоаем скролл за модальным окном
-  //   overflow: hidden;
-  // }
+  &.no-scroll,
+  &.show-sidebar {
+    // Убиоаем скролл за модальным окном
+    overflow: hidden;
+  }
 }
 
 a {

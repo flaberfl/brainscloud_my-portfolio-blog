@@ -15,9 +15,11 @@
 
     @include breakpoint($tablet-bp) {
       position: static;
+      // display: block;
       width: 100%;
+      padding-left: 2rem;
       
-      background: transparent;
+      background-color: transparent;
       box-shadow: none;
     }
 }
@@ -35,4 +37,16 @@
         background-color: darken($blue, 5%);
         text-decoration: none;
     }
+
+    @include breakpoint($tablet-bp) {
+      padding-left: 0;
+      padding-right: 0;
+
+      font-size: 1.5rem;
+
+      &:hover {
+        background: none;
+      }
+    }
+
 }

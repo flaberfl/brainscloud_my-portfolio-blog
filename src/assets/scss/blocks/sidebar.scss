@@ -11,8 +11,13 @@
   z-index: $z-index-sidebar;
 
   @include breakpoint($tablet-bp) {
-    top: 4rem;
+    display: flex;
+    flex-direction: column;
     height: calc(100vh - 4rem);
+    padding-bottom: 1.5rem;
+    overflow: auto;  // Чтобы скроллился сайдбар
+
+    top: 4rem;
     transform: translateX(-100%);
     transition: transform 1s linear ;
 
@@ -24,7 +29,7 @@
 }
 
 .sidebar__header {
-  height: 180px;
+  height: 18rem;
   background-color: $secondary;
 
   img {
@@ -41,6 +46,7 @@
 
 .sidebar__content {
   padding: 0 2rem;
+  flex-grow: 1;
 }
 
 .sidebar__footer {
