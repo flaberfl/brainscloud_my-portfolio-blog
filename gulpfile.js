@@ -14,7 +14,7 @@ const cssnano = require("gulp-cssnano");
 const uglify = require("gulp-uglify");
 const plumber = require("gulp-plumber");
 const panini = require("panini");
-// const imagemin = require("gulp-imagemin");
+const imagemin = require("gulp-imagemin");
 const del = require("del");
 const notify = require("gulp-notify");
 const webpack = require('webpack');
@@ -224,27 +224,27 @@ function jsWatch(cb) {
 
 function images(cb) {
   return src(path.src.images)
-    // .pipe(imagemin([
-    //   imagemin.gifsicle({
-    //     interlaced: true
-    //   }),
-      // imagemin.mozjpeg({
-      //   quality: 95,
-      //   progressive: true
-      // }),
-      // imagemin.optipng({
-      //   optimizationLevel: 5
-      // }),
-    //   imagemin.svgo({
-    //     plugins: [{
-    //         removeViewBox: true
-    //       },
-    //       {
-    //         cleanupIDs: false
-    //       }
-    //     ]
-    //   })
-    // ]))
+    .pipe(imagemin([
+      imagemin.gifsicle({
+        interlaced: true
+      }),
+      imagemin.mozjpeg({
+        quality: 95,
+        progressive: true
+      }),
+      imagemin.optipng({
+        optimizationLevel: 5
+      }),
+      imagemin.svgo({
+        plugins: [{
+            removeViewBox: true
+          },
+          {
+            cleanupIDs: false
+          }
+        ]
+      })
+    ]))
     .pipe(dest(path.build.images))
     .pipe(browserSync.reload({
       stream: true
