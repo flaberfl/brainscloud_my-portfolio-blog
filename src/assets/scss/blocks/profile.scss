@@ -1,7 +1,7 @@
 .profile {
   margin-top: -5rem;
 
-  @include breakpoint($tablet-bp) {  
+  @include breakpoint($tablet-bp) {
     margin-top: -1.5rem;
     position: relative;
 
@@ -32,7 +32,7 @@
 
 .profile__header {
   margin-bottom: 2rem;
-  
+
   text-align: center;
 
   @include breakpoint($tablet-bp) {
