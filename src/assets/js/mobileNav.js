@@ -22,7 +22,7 @@ function showSidebar() {
   mask.classList.add('page__mask');
   mask.addEventListener('click', closeSidebar);
   page.appendChild(mask);
-  
+
   body.classList.add('show-sidebar');
 }
 
