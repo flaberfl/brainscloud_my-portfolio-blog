@@ -23,7 +23,7 @@ body {
 
   &.no-scroll,
   &.show-sidebar {
-    // Убиоаем скролл за модальным окном
+    // Убираем скролл за модальным окном
     overflow: hidden;
   }
 }
@@ -59,3 +59,4 @@ a {
 @import "blocks/cabinet";
 @import "blocks/signup";
 @import "blocks/modal";
+
