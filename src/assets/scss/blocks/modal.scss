@@ -34,6 +34,10 @@
   transform: translateY(-10rem);
   transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
 
+  @include breakpoint($tablet-bp) {
+    padding: 5rem 5rem 3rem;
+  }
+
   &--contact {
     padding-bottom: 2.5rem;
   }
@@ -83,4 +87,8 @@
 .modal__video {
   display: block;
   margin: 0 auto;
+  width: 70rem;
+  height: 70rem;
+  background-color: $white;
+  border-radius: 1.6rem;
 }
