@@ -13,7 +13,6 @@ burger.addEventListener('click', event => {
   } else {
     showSidebar();
   }
-
 });
 
 

@@ -23,7 +23,6 @@ body {
 
   &.no-scroll,
   &.show-sidebar {
-    // Убираем скролл за модальным окном
     overflow: hidden;
   }
 }
