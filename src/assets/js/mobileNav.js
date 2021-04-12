@@ -15,7 +15,6 @@ burger.addEventListener('click', event => {
   }
 });
 
-
 function showSidebar() {
   let mask = document.createElement('div');
   mask.classList.add('page__mask');
